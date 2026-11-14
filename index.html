@@ -1,10 +1,9 @@
-<!DOCTYPE html><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر باقات وفليكسات فودافون</title>
-    <!-- استدعاء خط كايرو الاحترافي -->
+    <title>متجر باقات فودافون واتصالات</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,294 +11,197 @@
             --card-bg: #111622;
             --card-border: #1e2638;
             --voda-red: #e60000;
-            --voda-glow: #ff1a1a;
+            --etisalat-green: #10b981;
             --gold: #f59e0b;
             --emerald: #10b981;
             --text-light: #f8fafc;
             --text-gray: #94a3b8;
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
         body {
             background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(230, 0, 0, 0.12), transparent 35%),
-                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.08), transparent 40%);
+            background-image: radial-gradient(circle at 10% 10%, rgba(230, 0, 0, 0.12), transparent 35%), radial-gradient(circle at 90% 50%, rgba(16, 185, 129, 0.08), transparent 40%);
             color: var(--text-light);
             line-height: 1.6;
             padding-bottom: 110px;
         }
-        /* الهيدر الفخم */
         header {
             background: linear-gradient(180deg, rgba(20, 26, 41, 0.9) 0%, rgba(7, 9, 14, 0.95) 100%);
-            padding: 35px 20px 25px;
+            padding: 30px 20px 20px;
             text-align: center;
             border-bottom: 1px solid var(--card-border);
             position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--voda-red), var(--gold), transparent);
         }
         .badge-top {
             display: inline-block;
-            background: rgba(230, 0, 0, 0.15);
-            color: #ff4d4d;
-            border: 1px solid rgba(230, 0, 0, 0.3);
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
             padding: 4px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 10px;
-        }
-        header h1 {
-            font-size: 1.7rem;
-            font-weight: 900;
             margin-bottom: 8px;
-            color: #ffffff;
-            text-shadow: 0 2px 15px rgba(255, 255, 255, 0.15);
         }
-        header p {
-            font-size: 0.9rem;
+        header h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; color: #fff; }
+        header p { font-size: 0.88rem; color: var(--text-gray); max-width: 450px; margin: 0 auto; }
+        .container { max-width: 650px; margin: 0 auto; padding: 15px; }
+
+        /* أزرار التبديل بين فودافون واتصالات */
+        .tabs-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: #0d121c;
+            padding: 8px;
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            margin: 10px 0 22px;
+        }
+        .tab-btn {
+            background: transparent;
             color: var(--text-gray);
-            max-width: 450px;
-            margin: 0 auto;
+            border: none;
+            padding: 12px 10px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s;
         }
-        .container {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-        /* عناوين الأقسام */
+        .tab-btn.active-voda { background: linear-gradient(135deg, var(--voda-red), #990000); color: #fff; box-shadow: 0 4px 15px rgba(230, 0, 0, 0.35); }
+        .tab-btn.active-etisalat { background: linear-gradient(135deg, #10b981, #047857); color: #fff; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); }
+
+        .network-menu { display: none; }
+        .network-menu.active { display: block; }
+
         .section-title {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 28px 0 14px;
+            margin: 22px 0 12px;
             padding-bottom: 8px;
             border-bottom: 1px solid var(--card-border);
         }
-        .section-title h2 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .section-title span.tag {
-            font-size: 0.75rem;
-            background: #1e293b;
-            color: #38bdf8;
-            padding: 3px 10px;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-        /* التنبيهات */
+        .section-title h2 { font-size: 1.15rem; font-weight: 800; color: #fff; }
+        .section-title span.tag { font-size: 0.75rem; background: #1e293b; color: #38bdf8; padding: 3px 10px; border-radius: 8px; font-weight: 600; }
+
         .alert-box {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(230, 0, 0, 0.05));
+            background: rgba(245, 158, 11, 0.08);
             border: 1px solid rgba(245, 158, 11, 0.3);
             border-right: 4px solid var(--gold);
             color: #fde68a;
-            padding: 12px 15px;
+            padding: 10px 14px;
             border-radius: 12px;
-            font-size: 0.85rem;
-            margin-bottom: 18px;
+            font-size: 0.84rem;
+            margin-bottom: 16px;
             font-weight: 600;
         }
-        /* شبكة الكروت */
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-        }
-        @media (min-width: 480px) {
-            .grid-2 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        /* تصميم الكارت */
+
+        .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 480px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 18px;
+            border-radius: 16px;
+            padding: 16px;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
-        .card:hover {
-            border-color: rgba(230, 0, 0, 0.5);
-            transform: translateY(-3px);
-        }
-        .card-row {
-            flex-direction: row;
-            align-items: center;
-        }
+        .card-row { flex-direction: row; align-items: center; }
         .ribbon {
             position: absolute;
             top: -10px;
             left: 15px;
             background: linear-gradient(135deg, var(--voda-red), #b30000);
-            color: white;
-            font-size: 0.72rem;
+            color: #fff;
+            font-size: 0.7rem;
             font-weight: 800;
             padding: 2px 10px;
             border-radius: 20px;
-            box-shadow: 0 3px 8px rgba(230, 0, 0, 0.4);
         }
-        .ribbon-gold {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 3px 8px rgba(245, 158, 11, 0.4);
-        }
-        .card-info h3 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-        .card-info .sub {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .price-wrap {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-        .price-new {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: var(--emerald);
-        }
-        .price-old {
-            font-size: 0.85rem;
-            color: #ef4444;
-            text-decoration: line-through;
-            opacity: 0.8;
-        }
-        /* زرار الإضافة */
+        .ribbon-gold { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .ribbon-green { background: linear-gradient(135deg, #10b981, #047857); }
+
+        .card-info h3 { font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 3px; }
+        .card-info .sub { font-size: 0.82rem; color: var(--text-gray); margin-bottom: 8px; font-weight: 600; }
+        .price-wrap { display: flex; align-items: baseline; gap: 8px; }
+        .price-new { font-size: 1.15rem; font-weight: 900; color: var(--emerald); }
+        .price-old { font-size: 0.82rem; color: #ef4444; text-decoration: line-through; }
+
         .btn-add {
             background: linear-gradient(135deg, #1e293b, #0f172a);
             color: #fff;
             border: 1px solid #334155;
-            padding: 10px 18px;
+            padding: 9px 16px;
             border-radius: 12px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all 0.2s;
             white-space: nowrap;
         }
-        .btn-add:hover, .btn-add:active {
-            background: linear-gradient(135deg, var(--voda-red), #b30000);
-            border-color: var(--voda-red);
-            box-shadow: 0 4px 15px rgba(230, 0, 0, 0.35);
-        }
-        .card:not(.card-row) .btn-add {
-            margin-top: 14px;
-            width: 100%;
-        }
-        /* خطوات الطلب والدفع */
-        .info-panel {
-            background: linear-gradient(145deg, #111622, #0b0f17);
-            border: 1px solid var(--card-border);
-            border-radius: 18px;
-            padding: 20px;
-            margin-top: 25px;
-        }
-        .info-panel h4 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--gold);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .step-list {
-            list-style: none;
-        }
-        .step-list li {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-        /* كارت الدفع والنسخ */
+        .btn-add:active { background: var(--voda-red); border-color: var(--voda-red); }
+        .btn-add-etisalat:active { background: var(--etisalat-green); border-color: var(--etisalat-green); }
+        .card:not(.card-row) .btn-add { margin-top: 12px; width: 100%; }
+
+        /* صندوق الدفع وإرفاق الصورة المباشر */
         .pay-card {
             background: linear-gradient(135deg, #161e2e, #0f1420);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 18px;
-            padding: 20px;
-            margin-top: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 22px;
             text-align: center;
         }
-        .pay-methods {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .pay-badge {
-            background: rgba(255,255,255,0.06);
-            padding: 5px 14px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #e2e8f0;
-        }
+        .pay-methods { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+        .pay-badge { background: rgba(255,255,255,0.07); padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; }
         .number-copy-box {
             background: #07090e;
             border: 1px dashed #38bdf8;
             border-radius: 12px;
-            padding: 10px 15px;
-            margin: 12px auto;
-            max-width: 300px;
+            padding: 8px 14px;
+            margin: 10px auto;
+            max-width: 290px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .number-copy-box span {
-            font-size: 1.25rem;
-            font-weight: 900;
-            color: #38bdf8;
-            letter-spacing: 1px;
-        }
-        .btn-copy {
-            background: #0284c7;
-            color: white;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 700;
+        .number-copy-box span { font-size: 1.2rem; font-weight: 900; color: #38bdf8; letter-spacing: 1px; }
+        .btn-copy { background: #0284c7; color: #fff; border: none; padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+
+        /* تصميم زر رفع سكرين التحويل */
+        .upload-box {
+            display: block;
+            width: 100%;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px dashed #10b981;
+            color: #34d399;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
             cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 800;
+            margin-top: 10px;
+            transition: 0.2s;
         }
-        /* الشريط السفلي العائم */
+        .upload-box:hover { background: rgba(16, 185, 129, 0.18); }
+
+        .info-panel {
+            background: #111622;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+        .info-panel h4 { font-size: 1.05rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
+        .step-list { list-style: none; font-size: 0.85rem; color: #cbd5e1; }
+        .step-list li { margin-bottom: 8px; }
+
         .bottom-bar {
             position: fixed;
             bottom: 12px;
@@ -307,62 +209,46 @@
             transform: translateX(-50%);
             width: calc(100% - 24px);
             max-width: 620px;
-            background: rgba(17, 22, 34, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(17, 22, 34, 0.96);
+            backdrop-filter: blur(12px);
             border: 1px solid #334155;
-            border-radius: 18px;
-            padding: 12px 16px;
+            border-radius: 16px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             z-index: 999;
         }
-        .cart-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
+        .cart-status { display: flex; align-items: center; gap: 10px; cursor: pointer; }
         .cart-badge {
             background: var(--voda-red);
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 10px;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 0.95rem;
         }
-        .cart-text {
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        .cart-text small {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            font-weight: 600;
-        }
+        .cart-text { font-size: 0.88rem; font-weight: 700; }
+        .cart-text small { display: block; font-size: 0.72rem; color: var(--text-gray); }
         .btn-open-modal {
             background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
+            color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
+            padding: 9px 18px;
+            border-radius: 10px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
         }
-        /* نافذة السلة وإتمام الطلب (Modal) */
+
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
             align-items: flex-end;
@@ -372,106 +258,39 @@
             background: #111622;
             width: 100%;
             max-width: 600px;
-            border-radius: 24px 24px 0 0;
-            padding: 22px;
-            border-top: 2px solid var(--voda-red);
-            max-height: 85vh;
+            border-radius: 22px 22px 0 0;
+            padding: 20px;
+            border-top: 2px solid var(--gold);
+            max-height: 88vh;
             overflow-y: auto;
-            animation: slideUp 0.25s ease;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
         }
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--card-border);
         }
-        .modal-header h3 {
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-        .btn-close {
-            background: #1e293b;
-            color: #fff;
-            border: none;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .cart-items-list {
-            margin-bottom: 18px;
-        }
+        .btn-close { background: #1e293b; color: #fff; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; }
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: #0b0f17;
-            padding: 10px 14px;
+            padding: 10px 12px;
             border-radius: 10px;
             margin-bottom: 8px;
             border: 1px solid #1e2638;
         }
-        .cart-item-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-        .cart-item-price {
-            font-size: 0.85rem;
-            color: var(--emerald);
-            font-weight: 700;
-        }
-        .btn-remove-item {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 0.82rem;
-            color: #cbd5e1;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-        .form-group input {
-            width: 100%;
-            background: #07090e;
-            border: 1px solid #334155;
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #38bdf8;
-        }
-        .btn-send-wa {
-            width: 100%;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        /* إشعار الإضافة الخفيف (Toast) */
+        .cart-item-title { font-size: 0.88rem; font-weight: 700; }
+        .cart-item-price { font-size: 0.82rem; color: var(--emerald); font-weight: 700; }
+        .btn-remove-item { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+        .form-group { margin-bottom: 12px; text-align: right; }
+        .form-group label { display: block; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 4px; font-weight: 700; }
+        .form-group input { width: 100%; background: #07090e; border: 1px solid #334155; color: #fff; padding: 9px 12px; border-radius: 10px; font-size: 0.88rem; }
+
+        .btn-send-wa { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 12px; border-radius: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer; margin-top: 8px; }
         .toast {
             position: fixed;
             top: 20px;
@@ -483,9 +302,21 @@
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 700;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             display: none;
             z-index: 3000;
+        }
+        .preview-box {
+            display: none;
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .preview-box img {
+            max-height: 110px;
+            border-radius: 8px;
+            border: 1px solid #10b981;
         }
     </style>
 </head>
@@ -495,180 +326,257 @@
 
     <header>
         <div class="badge-top">⚡ تفعيل فوري وأمان تام</div>
-        <h1>🔥 عروض فودافون فليكس والإنترنت 🔥</h1>
-        <p>معانا تجدد باقتك وتستمتع بفليكسات وجيجات أكتر بسعر أقل! 💥</p>
+        <h1>🔥 عروض باقات فودافون واتصالات 🔥</h1>
+        <p>اختر شبكتك واستمتع بأقوى عروض الفليكسات والميكسات والإنترنت بسعر أقل! 💥</p>
     </header>
 
     <div class="container">
+
+        <!-- أزرار التبديل بين قائمة فودافون وقائمة اتصالات -->
+        <div class="tabs-wrapper">
+            <button class="tab-btn active-voda" id="btnVoda" onclick="switchMenu('voda')">🔴 قائمة فودافون</button>
+            <button class="tab-btn" id="btnEtisalat" onclick="switchMenu('etisalat')">🟢 قائمة اتصالات</button>
+        </div>
         
-        <!-- القسم الأول: عروض الأنظمة -->
-        <div class="section-title">
-            <h2>🔴 عروض تجديد باقات فليكس</h2>
-            <span class="tag">حسب نظام خطك</span>
+        <!-- ==================== قائمة فودافون ==================== -->
+        <div id="vodaMenu" class="network-menu active">
+            
+            <div class="section-title">
+                <h2>🔴 عروض تجديد باقات فليكس</h2>
+                <span class="tag">حسب نظام خطك</span>
+            </div>
+            <div class="alert-box">
+                ⚡ كل خط وليه العرض المناسب ليه! العروض بتختلف حسب نظام الخط وحالته، علشان كده مش كل العروض بتكون متاحة لكل الأرقام.
+            </div>
+
+            <div class="grid">
+                <div class="card card-row">
+                    <span class="ribbon">توفير</span>
+                    <div class="card-info">
+                        <h3>لو نظامك فليكس 52</h3>
+                        <div class="sub">📦 1500 فليكس</div>
+                        <div class="price-wrap">
+                            <span class="price-new">سعر خاص 🔥</span>
+                            <span class="price-old">بدل 70 ج</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - فليكس 52 (1500 فليكس)', 'سعر خاص بدل 70')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <div class="card-info">
+                        <h3>لو نظامك فليكس 80</h3>
+                        <div class="sub">📦 3000 فليكس</div>
+                        <div class="price-wrap">
+                            <span class="price-new">90 جنيه</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - فليكس 80 (3000 فليكس)', '90 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <span class="ribbon">الأكثر طلباً</span>
+                    <div class="card-info">
+                        <h3>لو نظامك فليكس 115</h3>
+                        <div class="sub">📦 5000 فليكس</div>
+                        <div class="price-wrap">
+                            <span class="price-new">سعر خاص 🔥</span>
+                            <span class="price-old">بدل 130 ج</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - فليكس 115 (5000 فليكس)', 'سعر خاص بدل 130')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <div class="card-info">
+                        <h3>لو نظامك فليكس 175</h3>
+                        <div class="sub">📦 9000 فليكس</div>
+                        <div class="price-wrap">
+                            <span class="price-new">180 جنيه 🔥</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - فليكس 175 (9000 فليكس)', '180 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <span class="ribbon ribbon-gold">باقة VIP</span>
+                    <div class="card-info">
+                        <h3>لو نظامك فليكس 345</h3>
+                        <div class="sub">📦 21000 فليكس</div>
+                        <div class="price-wrap">
+                            <span class="price-new">سعر خاص 🔥</span>
+                            <span class="price-old">بدل 370 ج</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - فليكس 345 (21000 فليكس)', 'سعر خاص بدل 370')">+ أضف للسلة</button>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2>💎 باقات الفليكسات الكبيرة</h2>
+                <span class="tag">تفعيل فوري</span>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-info">
+                        <h3>باقة 5200 فليكس</h3>
+                        <div class="sub">⚡ تفعيل فوري مضمون</div>
+                        <div class="price-wrap"><span class="price-new">130 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - 5200 فليكس', '130 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-info">
+                        <h3>باقة 6500 فليكس</h3>
+                        <div class="sub">⚡ تفعيل فوري (حسب النظام)</div>
+                        <div class="price-wrap"><span class="price-new">150 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - 6500 فليكس', '150 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card">
+                    <span class="ribbon ribbon-gold">ممتازة</span>
+                    <div class="card-info">
+                        <h3>باقة 10400 فليكس</h3>
+                        <div class="sub">⚡ تفعيل فوري مضمون</div>
+                        <div class="price-wrap"><span class="price-new">230 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - 10400 فليكس', '230 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-info">
+                        <h3>باقة 21000 فليكس</h3>
+                        <div class="sub">⚡ باقة ضخمة (شرط النظام)</div>
+                        <div class="price-wrap"><span class="price-new">370 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - 21000 فليكس', '370 جنيه')">+ أضف للسلة</button>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2>🌐 باقات الإنترنت المحمول</h2>
+                <span class="tag">جيجات صافي</span>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-info">
+                        <h3>باقة 20 جيجا</h3>
+                        <div class="sub">🚀 إنترنت فائق السرعة</div>
+                        <div class="price-wrap"><span class="price-new">350 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - إنترنت 20 جيجا', '350 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card">
+                    <span class="ribbon">سوبر نت</span>
+                    <div class="card-info">
+                        <h3>باقة 45 جيجا</h3>
+                        <div class="sub">🚀 إنترنت فائق السرعة</div>
+                        <div class="price-wrap"><span class="price-new">600 جنيه</span></div>
+                    </div>
+                    <button class="btn-add" onclick="addToCart('فودافون - إنترنت 45 جيجا', '600 جنيه')">+ أضف للسلة</button>
+                </div>
+            </div>
+
         </div>
-        <div class="alert-box">
-            ⚡ كل خط وليه العرض المناسب ليه! العروض بتختلف حسب نظام الخط وحالته، علشان كده مش كل العروض بتكون متاحة لكل الأرقام.
+
+        <!-- ==================== قائمة اتصالات ==================== -->
+        <div id="etisalatMenu" class="network-menu">
+            
+            <div class="section-title">
+                <h2>🟢 باقات وعروض اتصالات المميزة</h2>
+                <span class="tag">تفعيل فوري</span>
+            </div>
+            <div class="alert-box" style="border-right-color: var(--etisalat-green);">
+                ⚡ استمتع بأقوى باقات اتصالات الضخمة للمكالمات والإنترنت بتفعيل فوري ومضمون!
+            </div>
+
+            <div class="grid">
+                <div class="card card-row">
+                    <span class="ribbon ribbon-green">ممتازة</span>
+                    <div class="card-info">
+                        <h3>باقة اتصالات 30,000</h3>
+                        <div class="sub">📦 30,000 ميكس / وحدة شاملة</div>
+                        <div class="price-wrap"><span class="price-new">350 جنيه</span></div>
+                    </div>
+                    <button class="btn-add btn-add-etisalat" onclick="addToCart('اتصالات - باقة 30,000', '350 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <span class="ribbon ribbon-gold">الأكثر طلباً</span>
+                    <div class="card-info">
+                        <h3>باقة اتصالات 40,000</h3>
+                        <div class="sub">📦 40,000 ميكس / وحدة شاملة</div>
+                        <div class="price-wrap"><span class="price-new">450 جنيه</span></div>
+                    </div>
+                    <button class="btn-add btn-add-etisalat" onclick="addToCart('اتصالات - باقة 40,000', '450 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <span class="ribbon ribbon-green">قوية</span>
+                    <div class="card-info">
+                        <h3>باقة اتصالات 50,000</h3>
+                        <div class="sub">📦 50,000 ميكس / وحدة شاملة</div>
+                        <div class="price-wrap"><span class="price-new">550 جنيه</span></div>
+                    </div>
+                    <button class="btn-add btn-add-etisalat" onclick="addToCart('اتصالات - باقة 50,000', '550 جنيه')">+ أضف للسلة</button>
+                </div>
+
+                <div class="card card-row">
+                    <span class="ribbon ribbon-gold">باقة VIP 🔥</span>
+                    <div class="card-info">
+                        <h3>باقة اتصالات 60,000</h3>
+                        <div class="sub">📦 60,000 ميكس / وحدة شاملة</div>
+                        <div class="price-wrap"><span class="price-new">600 جنيه</span></div>
+                    </div>
+                    <button class="btn-add btn-add-etisalat" onclick="addToCart('اتصالات - باقة 60,000', '600 جنيه')">+ أضف للسلة</button>
+                </div>
+            </div>
+
         </div>
 
-        <div class="grid">
-            <div class="card card-row">
-                <span class="ribbon">توفير</span>
-                <div class="card-info">
-                    <h3>لو نظامك فليكس 52</h3>
-                    <div class="sub">📦 تاخد 1500 فليكس</div>
-                    <div class="price-wrap">
-                        <span class="price-new">سعر خاص 🔥</span>
-                        <span class="price-old">بدل 70 ج</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('عرض فليكس 52 (1500 فليكس)', 'سعر خاص بدل 70')">+ أضف للسلة</button>
+        <!-- ==================== قسم الدفع وإرسال سكرين التحويل (مشترك لفودافون واتصالات) ==================== -->
+        <div class="pay-card">
+            <h4 style="color:#fbbf24; font-size:1.15rem; font-weight:900;">💳 الدفع وإرفاق سكرين التحويل (فودافون & اتصالات)</h4>
+            <p style="font-size:0.82rem; color:#cbd5e1; margin-top:4px;">حول قيمة الباقة على الرقم التالي ثم أرفق صورة التحويل بالأسفل:</p>
+            
+            <div class="pay-methods">
+                <span class="pay-badge">🔴 فودافون كاش</span>
+                <span class="pay-badge">🟢 اتصالات كاش</span>
+                <span class="pay-badge">🟣 انستاباي (InstaPay)</span>
             </div>
 
-            <div class="card card-row">
-                <div class="card-info">
-                    <h3>لو نظامك فليكس 80</h3>
-                    <div class="sub">📦 تاخد 3000 فليكس</div>
-                    <div class="price-wrap">
-                        <span class="price-new">90 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('عرض فليكس 80 (3000 فليكس)', '90 جنيه')">+ أضف للسلة</button>
+            <div class="number-copy-box">
+                <span id="payNumber">01007930914</span>
+                <button class="btn-copy" onclick="copyNum()">نسخ الرقم</button>
             </div>
 
-            <div class="card card-row">
-                <span class="ribbon">الأكثر طلباً</span>
-                <div class="card-info">
-                    <h3>لو نظامك فليكس 115</h3>
-                    <div class="sub">📦 تاخد 5000 فليكس</div>
-                    <div class="price-wrap">
-                        <span class="price-new">سعر خاص 🔥</span>
-                        <span class="price-old">بدل 130 ج</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('عرض فليكس 115 (5000 فليكس)', 'سعر خاص بدل 130')">+ أضف للسلة</button>
-            </div>
+            <!-- زر رفع سكرين التحويل المباشر في الصفحة -->
+            <label for="transferScreen" class="upload-box">
+                <span id="mainUploadText">📸 اضغط هنا لإرفاق سكرين شوت التحويل (فودافون أو اتصالات)</span>
+            </label>
+            <input type="file" id="transferScreen" accept="image/*" style="display:none" onchange="previewImage(event)">
 
-            <div class="card card-row">
-                <div class="card-info">
-                    <h3>لو نظامك فليكس 175</h3>
-                    <div class="sub">📦 تاخد 9000 فليكس</div>
-                    <div class="price-wrap">
-                        <span class="price-new">180 جنيه 🔥</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('عرض فليكس 175 (9000 فليكس)', '180 جنيه')">+ أضف للسلة</button>
-            </div>
-
-            <div class="card card-row">
-                <span class="ribbon ribbon-gold">باقة VIP</span>
-                <div class="card-info">
-                    <h3>لو نظامك فليكس 345</h3>
-                    <div class="sub">📦 تاخد 21000 فليكس</div>
-                    <div class="price-wrap">
-                        <span class="price-new">سعر خاص 🔥</span>
-                        <span class="price-old">بدل 370 ج</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('عرض فليكس 345 (21000 فليكس)', 'سعر خاص بدل 370')">+ أضف للسلة</button>
-            </div>
-        </div>
-
-        <!-- القسم الثاني: الباقات الإضافية الفورية -->
-        <div class="section-title">
-            <h2>💎 باقات الفليكسات الكبيرة</h2>
-            <span class="tag">تفعيل فوري</span>
-        </div>
-
-        <div class="grid grid-2">
-            <div class="card">
-                <div class="card-info">
-                    <h3>باقة 5200 فليكس</h3>
-                    <div class="sub">⚡ تفعيل فوري مضمون</div>
-                    <div class="price-wrap">
-                        <span class="price-new">130 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('باقة 5200 فليكس', '130 جنيه')">+ أضف للسلة</button>
-            </div>
-
-            <div class="card">
-                <div class="card-info">
-                    <h3>باقة 6500 فليكس</h3>
-                    <div class="sub">⚡ تفعيل فوري (حسب النظام)</div>
-                    <div class="price-wrap">
-                        <span class="price-new">150 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('باقة 6500 فليكس', '150 جنيه')">+ أضف للسلة</button>
-            </div>
-
-            <div class="card">
-                <span class="ribbon ribbon-gold">ممتازة</span>
-                <div class="card-info">
-                    <h3>باقة 10400 فليكس</h3>
-                    <div class="sub">⚡ تفعيل فوري مضمون</div>
-                    <div class="price-wrap">
-                        <span class="price-new">230 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('باقة 10400 فليكس', '230 جنيه')">+ أضف للسلة</button>
-            </div>
-        </div>
-
-        <!-- القسم الثالث: باقات الإنترنت -->
-        <div class="section-title">
-            <h2>🌐 باقات الإنترنت المحمول</h2>
-            <span class="tag">جيجات صافي</span>
-        </div>
-
-        <div class="grid grid-2">
-            <div class="card">
-                <div class="card-info">
-                    <h3>باقة 20 جيجا</h3>
-                    <div class="sub">🚀 إنترنت فائق السرعة</div>
-                    <div class="price-wrap">
-                        <span class="price-new">350 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('باقة إنترنت 20 جيجا', '350 جنيه')">+ أضف للسلة</button>
-            </div>
-
-            <div class="card">
-                <span class="ribbon">سوبر نت</span>
-                <div class="card-info">
-                    <h3>باقة 45 جيجا</h3>
-                    <div class="sub">🚀 إنترنت فائق السرعة</div>
-                    <div class="price-wrap">
-                        <span class="price-new">600 جنيه</span>
-                    </div>
-                </div>
-                <button class="btn-add" onclick="addToCart('باقة إنترنت 45 جيجا', '600 جنيه')">+ أضف للسلة</button>
+            <!-- معاينة الصورة في الصفحة الرئيسية -->
+            <div id="mainPreviewContainer" class="preview-box">
+                <img id="mainImgPreview" src="" alt="معاينة التحويل">
+                <div style="font-size:0.78rem; color:#10b981; font-weight:700; margin-top:4px;">✅ تم إرفاق صورة التحويل بنجاح! اضغط إتمام الطلب بالأسفل</div>
             </div>
         </div>
 
         <!-- طريقة الطلب -->
         <div class="info-panel">
-            <h4>📩 طريقة طلب العرض المناسب لخطك:</h4>
+            <h4>📩 خطوات تفعيل الباقة (فودافون & اتصالات):</h4>
             <ul class="step-list">
-                <li>1️⃣ اختر الباقة من الأعلى واضغط "إتمام الطلب" بالأسفل.</li>
-                <li>2️⃣ اكتب رقم الموبايل وكلمة مرور تطبيق (أنا فودافون) لمراجعة النظام.</li>
-                <li>3️⃣ بعد مراجعة نظام خطك، بنحدد العرض المتاح لرقمك ونبدأ التجديد فوراً ❤️</li>
+                <li>1️⃣ اختر الباقة من قائمة <strong>فودافون</strong> أو قائمة <strong>اتصالات</strong> بأعلى الصفحة.</li>
+                <li>2️⃣ حول المبلغ وأرفق <strong>سكرين شوت التحويل</strong> من الزر الأخضر أعلاه أو من داخل السلة.</li>
+                <li>3️⃣ اضغط <strong>"إتمام الطلب"</strong> بالأسفل واكتب رقم الموبايل وباسورد التطبيق ليتم التفعيل فوراً ❤️</li>
                 <li style="color:#f87171; font-size:0.8rem;">⚠️ لا تشارك بيانات الدخول أو أكواد التحقق إلا مع جهة تثق بها وبموافقتك.</li>
             </ul>
-        </div>
-
-        <!-- صندوق الدفع -->
-        <div class="pay-card">
-            <h4 style="color:#fbbf24; font-size:1.15rem; font-weight:800;">💳 طرق الدفع والتحويل</h4>
-            <div class="pay-methods">
-                <span class="pay-badge">🔴 فودافون كاش</span>
-                <span class="pay-badge">🟣 انستاباي (InstaPay)</span>
-            </div>
-            <div class="number-copy-box">
-                <span id="payNumber">01007930914</span>
-                <button class="btn-copy" onclick="copyNum()">نسخ الرقم</button>
-            </div>
-            <p style="font-size:0.8rem; color:#f87171; font-weight:700;">⚠️ برجاء إرسال سكرين شوت التحويل على الواتساب لتأكيد وتفعيل طلبك فوراً</p>
         </div>
 
     </div>
@@ -693,15 +601,27 @@
                 <button class="btn-close" onclick="closeCartModal()">✕</button>
             </div>
             
-            <div class="cart-items-list" id="modalItemsList"></div>
+            <div id="modalItemsList" style="margin-bottom:14px;"></div>
 
             <div class="form-group">
-                <label>📱 رقم الموبايل المراد تفعيل الباقة عليه (اختياري):</label>
-                <input type="tel" id="clientPhone" placeholder="مثال: 010xxxxxxxx">
+                <label>📱 رقم الموبايل المراد التفعيل عليه (فودافون أو اتصالات):</label>
+                <input type="tel" id="clientPhone" placeholder="مثال: 010xxxxxxxx / 011xxxxxxxx">
             </div>
             <div class="form-group">
-                <label>🔑 باسورد تطبيق أنا فودافون (لمراجعة النظام):</label>
+                <label>🔑 باسورد تطبيق (أنا فودافون / ماي اتصالات):</label>
                 <input type="text" id="clientPass" placeholder="اكتبه هنا أو أرسله في محادثة الواتساب">
+            </div>
+
+            <!-- خانة إرفاق سكرين شوت التحويل داخل السلة أيضاً -->
+            <div class="form-group">
+                <label>📸 سكرين شوت التحويل (لفودافون واتصالات):</label>
+                <label for="transferScreen" class="upload-box" style="margin-top:4px;">
+                    <span id="modalUploadText">📥 اضغط هنا لاختيار صورة التحويل من جهازك</span>
+                </label>
+                <div id="modalPreviewContainer" class="preview-box">
+                    <img id="modalImgPreview" src="" alt="معاينة التحويل">
+                    <div style="font-size:0.75rem; color:#10b981; font-weight:700; margin-top:4px;">✅ تم تجهيز سكرين التحويل! أرسله في الشات فور فتح الواتساب</div>
+                </div>
             </div>
 
             <button class="btn-send-wa" onclick="sendToWhatsApp()">إرسال الطلب عبر الواتساب 🚀</button>
@@ -710,6 +630,26 @@
 
     <script>
         let cart = [];
+        let hasScreenshot = false;
+
+        function switchMenu(network) {
+            let vodaMenu = document.getElementById('vodaMenu');
+            let etisalatMenu = document.getElementById('etisalatMenu');
+            let btnVoda = document.getElementById('btnVoda');
+            let btnEtisalat = document.getElementById('btnEtisalat');
+
+            if (network === 'voda') {
+                vodaMenu.classList.add('active');
+                etisalatMenu.classList.remove('active');
+                btnVoda.className = 'tab-btn active-voda';
+                btnEtisalat.className = 'tab-btn';
+            } else {
+                etisalatMenu.classList.add('active');
+                vodaMenu.classList.remove('active');
+                btnEtisalat.className = 'tab-btn active-etisalat';
+                btnVoda.className = 'tab-btn';
+            }
+        }
 
         function addToCart(name, price) {
             cart.push({ name: name, price: price });
@@ -728,7 +668,7 @@
             document.getElementById('cartCount').innerText = cart.length;
             document.getElementById('cartSubText').innerText = cart.length === 0 
                 ? 'السلة فارغة حالياً' 
-                : `تم اختيار ${cart.length} باقة - اضغط للمراجعة`;
+                : 'تم اختيار ' + cart.length + ' باقة - اضغط للمراجعة';
         }
 
         function showToast() {
@@ -739,7 +679,7 @@
 
         function openCartModal() {
             if (cart.length === 0) {
-                alert("السلة فارغة! اختر باقة واحدة على الأقل من العروض أولاً.");
+                alert("السلة فارغة! اختر باقة واحدة على الأقل من فودافون أو اتصالات أولاً.");
                 return;
             }
             renderModalItems();
@@ -766,6 +706,26 @@
             });
         }
 
+        function previewImage(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    // تحديث المعاينة في الصفحة الرئيسية وفي نافذة السلة معاً
+                    document.getElementById('mainImgPreview').src = e.target.result;
+                    document.getElementById('mainPreviewContainer').style.display = 'block';
+                    document.getElementById('mainUploadText').innerText = '🔄 تغيير صورة التحويل المرفقة';
+
+                    document.getElementById('modalImgPreview').src = e.target.result;
+                    document.getElementById('modalPreviewContainer').style.display = 'block';
+                    document.getElementById('modalUploadText').innerText = '🔄 تغيير صورة التحويل المرفقة';
+                    
+                    hasScreenshot = true;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function sendToWhatsApp() {
             if (cart.length === 0) return;
 
@@ -774,16 +734,16 @@
 
             let msg = "مرحباً، أريد طلب العروض التالية:%0A";
             cart.forEach((item, i) => {
-                msg += `${i + 1}. *${item.name}* (${item.price})%0A`;
+                msg += (i + 1) + ". *" + item.name + "* (" + item.price + ")%0A";
             });
 
             msg += "%0A━━━━━━━━━━━━━━%0A";
-            msg += `📱 *رقم الموبايل:* ${phoneInput || 'سأرسله الآن'}%0A`;
-            msg += `🔑 *باسورد أنا فودافون:* ${passInput || 'سأرسله الآن'}%0A`;
-            msg += "%0Aبرجاء مراجعة نظام الخط وتأكيد العرض المتاح.";
+            msg += "📱 *رقم الموبايل:* " + (phoneInput || "سأرسله الآن") + "%0A";
+            msg += "🔑 *باسورد التطبيق:* " + (passInput || "سأرسله الآن") + "%0A";
+            msg += "📸 *سكرين التحويل:* " + (hasScreenshot ? "تم تجهيز الصورة وسأرفقها الآن ✅" : "سأرسل سكرين التحويل الآن") + "%0A";
+            msg += "%0Aبرجاء مراجعة الخط وتأكيد العرض المتاح.";
 
-            let adminPhone = "201007930914";
-            window.open(`https://wa.me/${adminPhone}?text=${msg}`, '_blank');
+            window.open("https://wa.me/201007930914?text=" + msg, "_blank");
         }
 
         function copyNum() {
@@ -791,9 +751,5 @@
             alert("تم نسخ رقم الدفع: 01007930914");
         }
     </script>
-
 </body>
 </html>
-
-</html>
->
