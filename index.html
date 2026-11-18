@@ -1,4 +1,4 @@
-here<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -589,7 +589,7 @@ here<!DOCTYPE html>
     </div>
 
     <script>
-        // الباقات الافتراضية الأصلية لفودافون واتصالات عشان الموقع يشتغل بكامل شكله من غير تعب
+        // القائمة الافتراضية المباشرة (تظهر فوراً بدون الاعتماد على الذاكرة الفارغة)
         let defaultInitialCatalog = [
             { id: 1, network: 'voda', title: 'فليكس 52', sub: '📦 1500 فليكس', price: 70, priceLabel: 'سعر خاص بدل 70', ribbon: 'توفير' },
             { id: 2, network: 'voda', title: 'فليكس 80', sub: '📦 3000 فليكس', price: 90, priceLabel: '90 جنيه', ribbon: '' },
@@ -612,6 +612,7 @@ here<!DOCTYPE html>
             { id: 17, network: 'etisalat', title: 'باقة 90 جيجا نت بس', sub: '🚀 إنترنت اتصالات صافي', price: 400, priceLabel: '400 جنيه', ribbon: 'الأقوى للنت' }
         ];
 
+        // إجبار النظام على استخدام الكتالوج الافتراضي أو المحدث من الأدمن
         let packagesCatalog = JSON.parse(localStorage.getItem('omar_packages'));
         if (!packagesCatalog || packagesCatalog.length === 0) {
             packagesCatalog = defaultInitialCatalog;
@@ -627,10 +628,10 @@ here<!DOCTYPE html>
         }
 
         function buildStoreFront() {
-            let vodaBox = document.getElementById('gridVoda');
-            let etiBox = document.getElementById('gridEtisalat');
-            let orangeBox = document.getElementById('gridOrange');
-            let weBox = document.getElementById('gridWe');
+            let vodaBox = document.getElementById('containerVoda');
+            let etiBox = document.getElementById('containerEtisalat');
+            let orangeBox = document.getElementById('containerOrange');
+            let weBox = document.getElementById('containerWe');
 
             vodaBox.innerHTML = '';
             etiBox.innerHTML = '';
@@ -662,21 +663,21 @@ here<!DOCTYPE html>
                 else if (pkg.network === 'we') weBox.innerHTML += cardHTML;
             });
 
-            let tabOrangeEl = document.getElementById('tabOrange');
-            let tabWeEl = document.getElementById('tabWe');
+            let tabOrangeEl = document.getElementById('btnOrangeTab');
+            let tabWeEl = document.getElementById('btnWeTab');
 
             if (networkCounts.orange > 0) {
                 tabOrangeEl.style.display = 'block';
             } else {
                 tabOrangeEl.style.display = 'none';
-                if (document.getElementById('sectionOrange').classList.contains('active')) switchNetwork('voda');
+                if (document.getElementById('panelOrange').classList.contains('active')) changeActiveTab('voda');
             }
 
             if (networkCounts.we > 0) {
                 tabWeEl.style.display = 'block';
             } else {
                 tabWeEl.style.display = 'none';
-                if (document.getElementById('sectionWe').classList.contains('active')) switchNetwork('voda');
+                if (document.getElementById('panelWe').classList.contains('active')) changeActiveTab('voda');
             }
 
             if (networkCounts.voda === 0) vodaBox.innerHTML = `<div class="no-items-msg">لا توجد باقات مضافة لفودافون حالياً. ادخل لوحة الأدمن لإضافتها! ⚡</div>`;
@@ -687,15 +688,15 @@ here<!DOCTYPE html>
 
         window.onload = function() { buildStoreFront(); };
 
-        function switchNetwork(netKey) {
+        function changeActiveTab(netKey) {
             ['voda', 'etisalat', 'orange', 'we'].forEach(n => {
-                let pnl = document.getElementById('section' + n.charAt(0).toUpperCase() + n.slice(1));
-                let tb = document.getElementById('tab' + n.charAt(0).toUpperCase() + n.slice(1));
+                let pnl = document.getElementById('panel' + n.charAt(0).toUpperCase() + n.slice(1));
+                let tb = document.getElementById('btn' + n.charAt(0).toUpperCase() + n.slice(1) + 'Tab');
                 if (pnl) pnl.classList.remove('active');
-                if (tb) tb.className = 'net-tab';
+                if (tb) tb.className = 'net-tab-btn';
             });
-            document.getElementById('section' + netKey.charAt(0).toUpperCase() + netKey.slice(1)).classList.add('active');
-            document.getElementById('tab' + netKey.charAt(0).toUpperCase() + netKey.slice(1)).className = 'net-tab active-' + netKey;
+            document.getElementById('panel' + netKey.charAt(0).toUpperCase() + netKey.slice(1)).classList.add('active');
+            document.getElementById('btn' + netKey.charAt(0).toUpperCase() + netKey.slice(1) + 'Tab').className = 'net-tab-btn active-' + netKey;
 
             let root = document.documentElement;
             if (netKey === 'voda') {
@@ -741,7 +742,7 @@ here<!DOCTYPE html>
         }
 
         function triggerToastAlert(msg) {
-            let t = document.getElementById('toastAlert');
+            let t = document.getElementById('toastNotifBox');
             t.innerText = msg || '✅ تم تنفيذ العملية بنجاح';
             t.style.display = 'block';
             setTimeout(() => { t.style.display = 'none'; }, 1800);
@@ -758,7 +759,7 @@ here<!DOCTYPE html>
         function closeCheckoutModal() { document.getElementById('checkoutModal').style.display = 'none'; }
 
         function renderCartModalRows() {
-            let wrap = document.getElementById('cartItemsListContainer');
+            let wrap = document.getElementById('cartItemsListDiv');
             let sumBox = document.getElementById('cartTotalSummaryBox');
             wrap.innerHTML = '';
             let total = 0;
@@ -767,12 +768,12 @@ here<!DOCTYPE html>
             userCartItems.forEach((item, index) => {
                 total += item.numericPrice;
                 wrap.innerHTML += `
-                    <div class="cart-row-item">
+                    <div class="cart-item-row">
                         <div>
-                            <div class="cart-row-title">${item.name}</div>
-                            <div class="cart-row-price">${item.priceLabel}</div>
+                            <div class="cart-item-title-txt">${item.name}</div>
+                            <div class="cart-item-price-txt">${item.priceLabel}</div>
                         </div>
-                        <button class="btn-del-item" onclick="removeCartItemIndex(${index})">حذف 🗑️</button>
+                        <button class="btn-remove-row" onclick="removeCartItemIndex(${index})">حذف 🗑️</button>
                     </div>
                 `;
             });
@@ -788,13 +789,13 @@ here<!DOCTYPE html>
             }
         }
 
-        function handleReceiptUpload(e) {
+        function onReceiptFileSelected(e) {
             let fileObj = e.target.files[0];
             if (fileObj) {
                 let readerObj = new FileReader();
                 readerObj.onload = function(evt) {
-                    document.getElementById('receiptImgTag').src = evt.target.result;
-                    document.getElementById('receiptPreviewBox').style.display = 'block';
+                    document.getElementById('receiptImageTag').src = evt.target.result;
+                    document.getElementById('receiptPreviewContainer').style.display = 'block';
                     document.getElementById('uploadLabelText').innerText = '🔄 تغيير صورة التحويل المرفقة';
                     isReceiptLoaded = true;
                 };
@@ -830,7 +831,7 @@ here<!DOCTYPE html>
             window.open("https://wa.me/201007930914?text=" + txtMsg, "_blank");
         }
 
-        function copyPhoneNum() {
+        function copyBizNumber() {
             navigator.clipboard.writeText("01007930914");
             alert("تم نسخ رقم الدفع: 01007930914");
         }
@@ -840,13 +841,13 @@ here<!DOCTYPE html>
         function closeAdminLoginModal() { document.getElementById('adminLoginModal').style.display = 'none'; }
 
         function verifyAdminCredentials() {
-            let uName = document.getElementById('adminUserInput').value.trim();
-            let pWord = document.getElementById('adminPassInput').value.trim();
+            let uName = document.getElementById('adminUserField').value.trim();
+            let pWord = document.getElementById('adminPassField').value.trim();
 
             if (uName === 'Omar' && pWord === '812007') {
                 closeAdminLoginModal();
-                document.getElementById('adminUserInput').value = '';
-                document.getElementById('adminPassInput').value = '';
+                document.getElementById('adminUserField').value = '';
+                document.getElementById('adminPassField').value = '';
                 openAdminDashboardModal();
                 triggerToastAlert('🔓 أهلاً بك يا عمر في لوحة التحكم!');
             } else {
@@ -870,7 +871,7 @@ here<!DOCTYPE html>
             packagesCatalog.forEach(pkg => {
                 let netNamesMap = { voda: 'فودافون', etisalat: 'اتصالات', orange: 'أورانج', we: 'WE' };
                 wrapper.innerHTML += `
-                    <div class="admin-row-item">
+                    <div class="admin-package-item">
                         <div>
                             <div style="font-weight:900; font-size:0.88rem; color:#fff;">${pkg.title} <span style="font-size:0.72rem; color:#38bdf8;">(${netNamesMap[pkg.network]})</span></div>
                             <div style="font-size:0.78rem; color:#34d399;">${pkg.price} جنيه</div>
@@ -918,7 +919,7 @@ here<!DOCTYPE html>
                     priceLabel: priceVal + ' جنيه',
                     ribbon: ribbonVal || 'جديد 🔥'
                 };
-                packagesCatalog.push(freshPkg);
+                packagesCatalog.push(freshpkg);
                 triggerToastAlert('✅ تمت الإضافة وظهرت في الموقع بره!');
             }
 
@@ -944,7 +945,6 @@ here<!DOCTYPE html>
         }
 
         function clearAdminForm() {
-            document.getElementById('editingRecordId').value =్‌نيك
             document.getElementById('editingRecordId').value = '';
             document.getElementById('adminTitleInput').value = '';
             document.getElementById('adminSubInput').value = '';
